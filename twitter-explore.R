@@ -86,7 +86,7 @@ tweets.location <- word(tweets.data$user.location, 1) %>%
 tweets.location <- head(tweets.location, 200)
 
 # you must provide ggmap with your google API key
-register_google(key = "AIzaSyC_Tk3yx7yMjPTLJGssLh7ed21jTpmyOwI")
+register_google(key = "API-Key")
 
 # get geocode data for city names
 tweets.geocode <- geocode(tweets.location)
