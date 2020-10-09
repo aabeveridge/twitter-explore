@@ -8,9 +8,8 @@ library(maps)
 tweets.data.bulk <- stream_in('quilting.json') %>%
   as_tibble()
 
-# explore
+# explore number of columns/variables
 length(names(tweets.data.bulk))
-length(tweets.data.bulk$text)
 
 # convert json to data.frame/tibble and then reduce to only needed variables
 tweets.data <- stream_in('quilting.json') %>%
@@ -18,10 +17,11 @@ tweets.data <- stream_in('quilting.json') %>%
   select(created_at, text, user.description, user.favourites_count, user.followers_count, user.friends_count, user.location, user.name, user.screen_name, user.statuses_count, entities.user_mentions.0.screen_name, retweeted_status.user.screen_name, entities.urls.0.expanded_url, retweeted_status.user.entities.url.urls.0.expanded_url, retweet_count) %>%
   rename(tweet.datetime = created_at, total.favorites = user.favourites_count, total.followers = user.followers_count, total.friends = user.friends_count, screen.name = user.screen_name, total.statuses = user.statuses_count, tweet.mentions = entities.user_mentions.0.screen_name, retweet.mentions = retweeted_status.user.screen_name, url = entities.urls.0.expanded_url, retweet.url = retweeted_status.user.entities.url.urls.0.expanded_url, total.retweets = retweet_count)
 
-# explore differences in two datasets
+# compare differences in two datasets after reduction
 object.size(tweets.data.bulk)
 object.size(tweets.data)
-length(tweets.data$text)
+length(names(tweets.data.bulk))
+length(names(tweets.data))
 
 # remove bulk dataset from memory
 rm(tweets.data.bulk)
